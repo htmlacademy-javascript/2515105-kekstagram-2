@@ -121,11 +121,7 @@ const applyEffect = () => {
 
 const updateSliderVisibility = () => {
   const effectLevelContainer = document.querySelector('.img-upload__effect-level');
-  if (currentEffect === 'none') {
-    effectLevelContainer.classList.add('hidden');
-  } else {
-    effectLevelContainer.classList.remove('hidden');
-  }
+  effectLevelContainer.classList.toggle('hidden', currentEffect === 'none');
 };
 
 const updateEffectLevel = (value) => {
