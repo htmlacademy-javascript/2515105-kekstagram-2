@@ -1,5 +1,5 @@
-const BASE_URL = 'https://25.javascript.pages.academy/kekstagram';
-const GET_DATA_URL = `${BASE_URL}/data`;
+const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram/';
+const GET_DATA_URL = `${BASE_URL}data`;
 const POST_DATA_URL = BASE_URL;
 
 const checkResponse = (response) => {
@@ -10,22 +10,14 @@ const checkResponse = (response) => {
 };
 
 export const getPhotos = async () => {
-  try {
-    const response = await fetch(GET_DATA_URL);
-    return await checkResponse(response);
-  } catch (error) {
-    throw new Error('Не удалось загрузить фотографии. Попробуйте позже.');
-  }
+  const response = await fetch(GET_DATA_URL);
+  return checkResponse(response);
 };
 
 export const sendPhoto = async (formData) => {
-  try {
-    const response = await fetch(POST_DATA_URL, {
-      method: 'POST',
-      body: formData,
-    });
-    return await checkResponse(response);
-  } catch (error) {
-    throw new Error('Не удалось отправить фото. Проверьте соединение и попробуйте снова.');
-  }
+  const response = await fetch(POST_DATA_URL, {
+    method: 'POST',
+    body: formData,
+  });
+  return checkResponse(response);
 };

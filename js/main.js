@@ -4,7 +4,7 @@ import { openBigPicture } from './big-picture.js';
 import { initFilters } from './filters.js';
 import './upload-form.js';
 import './validation.js';
-import { showErrorMessage } from './util.js';
+import { showDataErrorMessage } from './util.js';
 
 const picturesContainer = document.querySelector('.pictures');
 
@@ -27,7 +27,7 @@ const loadAndRenderPhotos = async () => {
     renderPhotos(photos);
     initFilters(photos, renderPhotos);
   } catch (error) {
-    showErrorMessage(error.message);
+    showDataErrorMessage();
   }
 };
 
@@ -47,4 +47,3 @@ picturesContainer.addEventListener('click', (evt) => {
     openBigPicture(photo);
   }
 });
-
