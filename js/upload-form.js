@@ -1,5 +1,5 @@
 import { pristine } from './validation.js';
-import 'vendor/nouislider/nouislider.js';
+import '../vendor/nouislider/nouislider.js';
 import { sendPhoto } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './util.js';
 
@@ -36,7 +36,7 @@ const EFFECTS = {
     filter: (value) => `grayscale(${value})`,
     min: 0,
     max: 1,
-    step: 0.01,
+    step: 0.1,
     start: 1
   },
   'sepia': {
@@ -45,7 +45,7 @@ const EFFECTS = {
     filter: (value) => `sepia(${value})`,
     min: 0,
     max: 1,
-    step: 0.01,
+    step: 0.1,
     start: 1
   },
   'marvin': {
@@ -233,8 +233,9 @@ const closeUploadForm = () => {
 function onDocumentKeydown(evt) {
   if (evt.key === 'Escape') {
     const isInputFocused = evt.target === hashtagsInput || evt.target === descriptionInput;
+    const isErrorVisible = document.querySelector('.error') !== null;
 
-    if (!isInputFocused) {
+    if (!isInputFocused && !isErrorVisible) {
       evt.preventDefault();
       closeUploadForm();
     }
@@ -242,15 +243,16 @@ function onDocumentKeydown(evt) {
 }
 
 const loadPreviewImage = (file) => {
-  const reader = new FileReader();
-
-  reader.addEventListener('load', () => {
-    previewImage.src = reader.result;
-    resetFormState();
-  });
-
   if (file) {
-    reader.readAsDataURL(file);
+    const objectUrl = URL.createObjectURL(file);
+    previewImage.src = objectUrl;
+
+    const effectPreviews = document.querySelectorAll('.effects__preview');
+    effectPreviews.forEach((preview) => {
+      preview.style.backgroundImage = `url('${objectUrl}')`;
+    });
+
+    resetFormState();
   }
 };
 

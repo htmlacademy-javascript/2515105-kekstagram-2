@@ -69,3 +69,12 @@ export const showErrorMessage = (message) => {
   document.addEventListener('keydown', onErrorEscKeydown);
 };
 
+export const showDataErrorMessage = () => {
+  const template = document.querySelector('#data-error');
+  const element = template.content.cloneNode(true);
+  document.body.appendChild(element);
+
+  setTimeout(() => {
+    document.querySelector('.data-error')?.remove();
+  }, 5000);
+};
