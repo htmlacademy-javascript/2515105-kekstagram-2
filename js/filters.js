@@ -6,12 +6,12 @@ let currentPhotos = [];
 let onFilterChangeCallback = null;
 
 const getRandomPhotos = (photos) => {
-  const photosCopy = [...photos];
-  for (let i = photosCopy.length - 1; i > 0; i--) {
+  const shuffledPhotos = [...photos];
+  for (let i = shuffledPhotos.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [photosCopy[i], photosCopy[j]] = [photosCopy[j], photosCopy[i]];
+    [shuffledPhotos[i], shuffledPhotos[j]] = [shuffledPhotos[j], shuffledPhotos[i]];
   }
-  return photosCopy.slice(0, RANDOM_PHOTOS_COUNT);
+  return shuffledPhotos.slice(0, RANDOM_PHOTOS_COUNT);
 };
 
 const getDiscussedPhotos = (photos) => [...photos].sort((a, b) => b.comments.length - a.comments.length);
