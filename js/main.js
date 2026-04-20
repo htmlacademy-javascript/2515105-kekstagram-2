@@ -6,13 +6,13 @@ import './upload-form.js';
 import './validation.js';
 import { showDataErrorMessage } from './util.js';
 
-const picturesContainer = document.querySelector('.pictures');
+const picturesContainerElement = document.querySelector('.pictures');
 
 let photos = [];
 
 const clearThumbnails = () => {
-  const pictures = picturesContainer.querySelectorAll('.picture');
-  pictures.forEach((picture) => picture.remove());
+  const pictureElements = picturesContainerElement.querySelectorAll('.picture');
+  pictureElements.forEach((picture) => picture.remove());
 };
 
 const renderPhotos = (photosToRender) => {
@@ -33,17 +33,18 @@ const loadAndRenderPhotos = async () => {
 
 loadAndRenderPhotos();
 
-picturesContainer.addEventListener('click', (evt) => {
-  const thumbnail = evt.target.closest('.picture[data-photo-id]');
+picturesContainerElement.addEventListener('click', (evt) => {
+  const thumbnailElement = evt.target.closest('.picture[data-photo-id]');
 
-  if (!thumbnail) {
+  if (!thumbnailElement) {
     return;
   }
 
-  const photoId = Number(thumbnail.dataset.photoId);
+  const photoId = Number(thumbnailElement.dataset.photoId);
   const photo = photos.find(({ id }) => id === photoId);
 
   if (photo) {
     openBigPicture(photo);
   }
 });
+
